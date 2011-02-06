@@ -13,10 +13,7 @@ body {
 a {
 	color: #b3b3b3;
 	cursor: pointer;
-}
-
-ul {
-	margin-left: 25px;
+	text-decoration: none;
 }
 
 /*** nav ***/
@@ -37,6 +34,8 @@ ul {
 }
 
 #nav-list {
+	-moz-user-select: none;
+	-webkit-user-select: none;
 	bottom: 5px;
 	margin-left: 0;
 	overflow: auto;
@@ -54,21 +53,24 @@ ul {
 #nav-list a {
 	color: white;
 }
+#nav-list ul {
+	margin-left: 24px;
+}
 
 .nav-parent + ul {
 	display: none;
 }
-.nav-parent::before {
+.nav-parent > a::after {
 	content: "+ ";
-}
-.nav-parent-open::before {
-	content: "− ";
 }
 .nav-parent-open + ul {
 	display: block;
 }
+.nav-parent-open > a::after {
+	content: "− ";
+}
 
-.nav-item-selected {
+.nav-selected {
 	background-color: #797979;
 	display: block;
 }

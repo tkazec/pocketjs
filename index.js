@@ -1,21 +1,27 @@
 (function($, tree){
 
-build(tree).attr("id", "nav-list").appendTo("#nav");
+list(tree).attr("id", "nav-list").appendTo("#nav");
 
 $("a", "#nav-list").click(function(){
 	var $this = $(this);
-	$this.toggleClass("nav-item-selected" + ($this.hasClass("nav-parent") ? " nav-parent-open" : ""))
+	
+	if ($this.html() === "") {
+		$this.parent().toggleClass("nav-parent-open");
+		return false;
+	} else {
+		$this.add(".nav-selected", "#nav-list").toggleClass("nav-selected");
+	}
 });
 
-function build(obj) {
-	var $ul = $("<ul/>");
+function list(obj, path) {
+	var $ul = $("<ul/>"), path = path ? path + "/" : "#";
 	
 	$.each(obj.kids, function(name, thing){
 		var parent = thing.kids;
 		
 		$("<li/>")
-			.append($("<a/>").addClass(parent ? "nav-parent" : "nav-item").html(name))
-			.append(parent ? build(thing) : "")
+			.append($("<a/>").addClass(parent ? "nav-parent" : "nav-item").attr({ href: path + name, title: thing.long }).html("<a></a>" + name))
+			.append(parent ? list(thing, path + name) : "")
 			.appendTo($ul);
 	});
 	

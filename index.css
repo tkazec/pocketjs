@@ -47,7 +47,6 @@ a {
     width: 8px;
 }
 #nav-list::-webkit-scrollbar-thumb {
-	-webkit-border-radius: 4px;
 	background-color: #797979;
 }
 #nav-list a {
@@ -57,20 +56,20 @@ a {
 	margin-left: 24px;
 }
 
-.nav-parent + ul {
+.nav-list-parent + ul {
 	display: none;
 }
-.nav-parent > a::after {
-	content: "+ ";
+.nav-list-parent > a::after {
+	content: "+";
 }
-.nav-parent-open + ul {
+.nav-list-parent-open + ul {
 	display: block;
 }
-.nav-parent-open > a::after {
-	content: "− ";
+.nav-list-parent-open > a::after {
+	content: "−";
 }
 
-.nav-selected {
+.nav-list-selected {
 	background-color: #797979;
 	display: block;
 }

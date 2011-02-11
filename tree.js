@@ -7,49 +7,58 @@ var tree = {
 				"Array": {
 					"info": "blah",
 					"kids": {
+						".isArray()": {
+							"info": "Returns <code>true</code> if <var>obj</var> is an array, <code>false</code> if it's not.",
+							"args": [{
+								"name": "obj",
+								"desc": "Object to be checked.",
+								"type": "*"
+							}],
+							"returns": "Boolean",
+							"unsupported": []
+						},
+						"#length": {
+							"info": "Reflects the length of an array.",
+							"returns": "Number"
+						},
 						"#pop()": {
 							"info": "Removes the last element from an array and returns it.",
 							"args": [],
-							"returns": "*",
-							"mdc": "Global_Objects/Array/pop"
+							"returns": "*"
 						},
 						"#push()": {
-							"info": "Adds element(s) the end of an array and returns the new length.",
+							"info": "Adds <var>element</var>(s) the end of an array and returns the new length.",
 							"args": [{
 								"name": "element",
 								"desc": "Element(s) to add to the end of the array.",
 								"type": "*",
 								"unlimited": true
 							}],
-							"returns": "Number",
-							"mdc": "Global_Objects/Array/push"
+							"returns": "Number"
 						},
 						"#reverse()": {
 							"info": "Reverses an array and returns a reference to it.",
 							"args": [],
-							"returns": "Array",
-							"mdc": "Global_Objects/Array/reverse"
+							"returns": "Array"
 						},
 						"#shift()": {
 							"info": "Removes the first element from an array and returns it.",
 							"args": [],
-							"returns": "*",
-							"mdc": "Global_Objects/Array/shift"
+							"returns": "*"
 						},
 						"#sort()": {
-							"info": "Sorts an array and returns a reference to it. If compare is not supplied, sorts in lexographic order.",
+							"info": "Sorts an array and returns a reference to it. If <var>compare</var> is not supplied, sorts in lexographic order.",
 							"args": [{
 								"name": "compare",
-								"desc": "Function to sort the elements by. Sorts a lower than b if the return value is less than 0, higher if it's more than 0, and the same if it's 0.",
+								"desc": "Function to sort the elements by. Sorts <var>a</var> to a lower index than <var>b</var> if the return value is less than 0, higher if it's more than 0, and keeps them the same if it's exactly 0.",
 								"type": "Function",
 								"args": [{ "name": "a", "type": "*" }, { "name": "b", "type": "*" }],
 								"optional": true
 							}],
-							"returns": "Array",
-							"mdc": "Global_Objects/Array/sort"
+							"returns": "Array"
 						},
 						"#splice()": {
-							"info": "Adds and/or removes elements from an array, and returns the removed elements.",
+							"info": "Adds and/or removes <var>element</var>(s) from an array, and returns the removed <var>element</var>(s).",
 							"args": [{
 								"name": "index",
 								"desc": "Index at which to start changing the array. If negative, will begin that many elements from the end.",
@@ -65,19 +74,17 @@ var tree = {
 								"optional": true,
 								"unlimited": true
 							}],
-							"returns": "Array",
-							"mdc": "Global_Objects/Array/splice"
+							"returns": "Array"
 						},
 						"#unshift()": {
-							"info": "Adds element(s) to the beginning of an array and returns the new length.",
+							"info": "Adds <var>element</var>(s) to the beginning of an array and returns the new length.",
 							"args": [{
 								"name": "element",
 								"desc": "Element(s) to add to the beginning of the array.",
 								"type": "*",
 								"unlimited": true
 							}],
-							"returns": "Number",
-							"mdc": "Global_Objects/Array/unshift"
+							"returns": "Number"
 						}
 					}
 				},

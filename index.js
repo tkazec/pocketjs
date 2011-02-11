@@ -2,14 +2,14 @@
 
 /*** nav list ***/
 var $navlist = (function build(obj, path){
-	var $ul = $("<ul/>"), path = path ? path + "/" : "#";
+	var $ul = $("<ul/>"), path = path ? path + "/" : "";
 	
 	$.each(obj.kids, function(name, thing){
 		var parent = thing.kids, $li = $("<li/>");
 		
 		$("<a/>", {
-			class: "nav-list-" + (parent ? "parent" : "item"),
-			href: path + name,
+			Class: "nav-list-" + (parent ? "parent" : "item"),
+			href: "#" + encodeURIComponent(path + name),
 			html: (parent ? "<a></a> " : "") + name
 		}).appendTo($li);
 		
@@ -30,14 +30,14 @@ $("a", $navlist).children("a").click(function(){
 
 /*** loading ***/
 function load(hash) {
-	var item = tree, path = hash.substring(1).split("/");
+	var item = tree, hash = decodeURIComponent(hash), path = hash.substring(1).split("/");
 	
 	path.forEach(function(part){
 		item = item.kids[part];
 	});
 	
 	$("a", $navlist).each(function(){
-		var $this = $(this), href = $this.attr("href");
+		var $this = $(this), href = decodeURIComponent($this.attr("href"));
 		
 		if (hash.indexOf(href) === 0) {
 			$this.children().length && $this.addClass("nav-list-parent-open");

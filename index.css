@@ -51,6 +51,7 @@ a {
 }
 #nav-list a {
 	color: white;
+	outline: none;
 }
 #nav-list ul {
 	margin-left: 24px;

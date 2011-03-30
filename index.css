@@ -4,79 +4,124 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 /*** global ***/
 body {
-	background-color: #666666;
-	color: white;
-	font: 12px "Dejavu Sans", sans-serif;
-	margin: 5px;
+	font: 12px/15px "Dejavu Sans", sans-serif;
+	margin: 10px;
 }
 
 a {
-	color: #b3b3b3;
+	color: #0000FF;
 	cursor: pointer;
 	text-decoration: none;
 }
+a:hover, a:focus {
+	color: #0060FF;
+}
 
-/*** nav ***/
+var, code {
+	font-family: "DejaVu Sans Mono", monospace;
+}
+
+dl {
+	margin-top: 8px;
+}
+dt {
+	margin-top: 4px;
+}
+dd {
+	margin-left: 8px;
+}
+
+section {
+	-moz-box-shadow: 0 0 5px black;
+	-webkit-box-shadow: 0 0 5px black;
+	box-shadow: 0 0 5px black;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+var {
+	font-style: italic;
+}
+
+
+/*** layout ***/
 #nav {
-	background-color: #595959;
-	bottom: 5px;
-	padding: 3px;
+	-moz-box-shadow: 0 0 5px black;
+	-webkit-box-shadow: 0 0 5px black;
+	box-shadow: 0 0 5px black;
+	bottom: 10px;
+	padding: 5px;
 	position: fixed;
-	top: 5px;
+	top: 10px;
 	width: 200px;
 }
 
-#nav-search {
-	border: none;
-	margin: 0 0 10px 0;
-	padding: 2px;
-	width: 196px;
+#main {
+	margin-left: 220px;
 }
 
+
+/*** nav search ***/
+#nav-search {
+	margin: 0;
+	width: 200px;
+}
+
+
+/*** nav list ***/
 #nav-list {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	bottom: 5px;
-	margin-left: 0;
 	overflow: auto;
 	position: absolute;
-	top: 26px;
+	top: 30px;
 	width: 200px;
 }
-#nav-list::-webkit-scrollbar {
-    width: 8px;
-}
-#nav-list::-webkit-scrollbar-thumb {
-	background-color: #797979;
-}
-#nav-list a {
-	color: white;
-	outline: none;
-}
+
 #nav-list ul {
-	margin-left: 24px;
+	margin-left: 25px;
 }
 
 .nav-list-parent + ul {
 	display: none;
 }
 .nav-list-parent > a::after {
-	content: "+";
+	content: "+ ";
 }
 .nav-list-parent-open + ul {
 	display: block;
 }
 .nav-list-parent-open > a::after {
-	content: "−";
+	content: "− ";
 }
 
 .nav-list-selected {
-	background-color: #797979;
-	display: block;
+	color: #0060FF;
 }
 
 
-/*** main ***/
-#main {
-	margin-left: 210px;
+/*** syntax styling ***/
+pre {
+	border-bottom: 1px dotted #D3D3D3;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+pre > code > * {
+	font-weight: normal;
+}
+
+p > code, dd > code {
+	color: #A535AE;
+}
+
+.s-atype {
+	color: #FF5600;
+}
+.s-rtype {
+	color: #00A33F;
+}
+
+.s-optional {
+	color: #808080;
 }

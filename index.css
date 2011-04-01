@@ -125,3 +125,7 @@ p > code, dd > code {
 .s-optional {
 	color: #808080;
 }
+
+.s-unsupported {
+	color: #FF0000;
+}

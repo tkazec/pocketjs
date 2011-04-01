@@ -45,6 +45,8 @@ var $navlist = (function build(parent, path){
 		hasKids && $li.append(build(kid, path + name));
 		
 		$li.appendTo($ul);
+		
+		kid.name = name;
 	});
 	
 	return $ul;
@@ -73,12 +75,8 @@ $(window).bind("hashchange", function(){
 		}
 	});
 	
-	$navlist.children().css("margin-right", $navlist[0].scrollHeight > $navlist.height() ? 5 : 0);
-	
 	hash.substring(1).split("/").forEach(function(part){
-		item = item.kids[part];
-		item.name = part;
-		crumbs.unshift(item);
+		crumbs.unshift(item = item.kids[part]);
 	});
 	
 	$("#main").html(display(crumbs[1], crumbs[0]));
@@ -87,13 +85,13 @@ $(window).bind("hashchange", function(){
 
 /*** displaying ***/
 function html(parent, item) {
-	var syntax = "", argdesc = "";
+	var syntax = "", argdesc = "", nosupport = [], isFn = false;
 	
-	if (item.html) { return item.html; }
+	parent.name !== item.name && (syntax += "<a>" + parent.name.replace("()", "") + "</a>");
 	
-	!tree[parent.name] && (syntax += "<a>" + parent.name.replace("()", "") + "</a>");
-	
-	syntax += item.name.replace(/(#|\.)(\w+)/, "$1<a>$2</a>").replace("()", function(){
+	syntax += item.name.replace(/^(#|\.)?(\w+)/, "$1<a>$2</a>").replace("()", function(){
+		isFn = true;
+		
 		return "(" + item.args.map(function(arg){
 			argdesc += tmpl("tmpl-argdesc", arg);
 			
@@ -101,21 +99,29 @@ function html(parent, item) {
 		}).join(", ") + ")";
 	});
 	
-	syntax += ' &#x2192; <span class="s-rtype">' + $("<div/>").text(item.returns).html() + '</span>';
+	syntax += (isFn || item.readonly ? ' →' : ' ↔') + ' <span class="s-rtype">' + $("<div/>").text(item.returns).html() + '</span>';
 	
-	return item.html = $("<section />").append(
-		"<pre><code>" + syntax + "</code></pre>",
-		"<p>" + item.desc + " <a>more</a> ∙ <a>bug</a></p>",
-		argdesc && "<dl>" + argdesc + "</dl>"
-	);
+	$.each(item.unsupported || {}, function(browser, version){
+		nosupport.push(browser +  " ≤ " + version);
+	});
+	
+	return item.html = "<section>" +
+		'<pre><code>' + syntax + '</code></pre>' +
+		'<p>' + item.desc + (nosupport.length ? ' <span class="s-unsupported">Not supported in ' + nosupport.join(", ") + '.</span>' : '') + ' <a>more</a> ∙ <a>bug</a></p>' +
+		(argdesc && '<dl>' + argdesc + '</dl>') +
+	"</section>";
 }
 
 function display(parent, item) {
-	var out = html(parent, item);
+	var out = item.html || html(parent || item, item);
 	
-	$.each(item.kids || {}, function(name, kid){
-		out += html(item, kid);
-	});
+	if (item.kids) {
+		out += "<div style='margin-left:10px'>";
+		$.each(item.kids, function(name, kid){
+			out += kid.html || html(item, kid);
+		});
+		out += "</div>";
+	}
 	
 	return out;
 }

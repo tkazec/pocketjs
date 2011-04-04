@@ -1,5 +1,5 @@
 var tree = {
-	"desc": "foo",
+	"desc": "<p>PocketJS is a friendly JavaScript reference. &lt;3</p>",
 	"kids": {
 		"Math": {
 			"desc": "Various mathematical constants and functions.",

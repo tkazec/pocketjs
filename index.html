@@ -12,15 +12,7 @@
 		
 		<div id="main"></div>
 		
-		<script type="text/html" id="tmpl-arg">
-			<%?obj.optional%><span class="s-optional">[</span><%?%><span class="s-atype"><%=obj.type%></span> <var><%?obj.unlimited%>...<%?%><%=obj.name%></var><%?obj.optional%><span class="s-optional"><%?obj["default"]%> = <%==obj["default"]%><%?%>]</span><%?%>
-		</script>
-		<script type="text/html" id="tmpl-argdesc">
-			<dt><code><var><%=obj.name%></var></code></dt>
-			<dd><%=obj.desc%></dd>
-		</script>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script src="tree.js"></script>
 		<script src="index.js"></script>
 	</body>

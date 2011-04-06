@@ -388,7 +388,7 @@ var tree = {
 					"returns": "Number"
 				}
 			}
-		},
+		}/*,
 		"Boolean()": {
 			"desc": "Bar"
 		},
@@ -397,6 +397,6 @@ var tree = {
 		"Number()": {},
 		"Object()": {},
 		"RegExp()": {},
-		"String()": {}
+		"String()": {}*/
 	}
 };

@@ -1,8 +1,8 @@
 (function($, tree){
 
-/*** nav list ***/
+/*** listing ***/
 var $navlist = (function build(parent, path){
-	var $ul = $("<ul/>"), path = path ? path + "/" : "";
+	var $ul = $("<ul/>"), path = path ? path + "/" : "/";
 	
 	$.each(parent.kids, function(name, kid){
 		var hasKids = kid.kids, $li = $("<li/>"), kpath = path + name, ekpath = "#" + encodeURIComponent(kpath);
@@ -19,7 +19,7 @@ var $navlist = (function build(parent, path){
 		
 		kid.name = name;
 		kid.path = ekpath;
-		kid.more = 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/' + kpath.replace(/[.#()]/g, "");
+		kid.more = 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects' + kpath.replace(/[.#()]/g, "");
 	});
 	
 	return $ul;
@@ -32,11 +32,44 @@ $("a", $navlist).children("a").click(function(){
 });
 
 
+/*** searching ***/
+var $navsearch = $("#nav-search").bind("input", function(){
+	var text = $(this).val().trim().toLowerCase(), matches = [], out = "";
+	
+	if (!text) { return window.location.hash = $(".nav-list-selected", $navlist).attr("href") || ""; }
+	
+	window.location.hash = encodeURIComponent("?" + text);
+	
+	(function match(parent, item){
+		var index = (item.name || "").toLowerCase().indexOf(text);
+		
+		index !== -1 && matches.push({ parent: parent, item: item, index: index });
+		
+		item.kids && $.each(item.kids, function(k, v){ match(item.name ? item : v, v); });
+	})(tree, tree);
+	
+	if (matches.length) {
+		matches.sort(function(a, b){
+			var anl = a.item.name.length, bnl = b.item.name.length;
+			return a.index === b.index ? (anl === bnl ? 0 : anl - bnl) : a.index - b.index;
+		}).forEach(function(obj){
+			out += html(obj.parent, obj.item);
+		});
+	} else {
+		out = '<section><p>No results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a>Is this a problem?</a></p></section';
+	}
+	
+	$("#main").html(out);
+});
+
+
 /*** loading ***/
 $(window).bind("hashchange", function(){
 	var hash = decodeURIComponent(window.location.hash), item = tree, crumbs = [];
 	
 	if (!hash.length) { return $("#main").html('<section>' + item.desc + '</section>'); }
+	
+	if (hash[1] === "?") { !$navsearch.val() && $navsearch.val(hash.substring(2)).trigger("input"); return; }
 	
 	$("a", $navlist).each(function(){
 		var $this = $(this), href = decodeURIComponent($this.attr("href"));
@@ -48,7 +81,7 @@ $(window).bind("hashchange", function(){
 		}
 	});
 	
-	hash.substring(1).split("/").forEach(function(part){
+	hash.substring(2).split("/").forEach(function(part){
 		crumbs.unshift(item = item.kids[part]);
 	});
 	

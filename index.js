@@ -10,7 +10,7 @@ var $navlist = (function build(parent, path){
 		$("<a/>", {
 			Class: "nav-list-" + (hasKids ? "parent" : "item"),
 			href: ekpath,
-			html: (hasKids ? "<a></a>" : "") + name
+			html: (hasKids ? "<a>+</a> " : "") + name
 		}).appendTo($li);
 		
 		hasKids && $li.append(build(kid, path + name));
@@ -25,8 +25,8 @@ var $navlist = (function build(parent, path){
 	return $ul;
 })(tree).attr("id", "nav-list").appendTo("#nav");
 
-$("a", $navlist).children("a").click(function(){
-	$(this).parent().toggleClass("nav-list-parent-open");
+$("a", $navlist).children().click(function(){
+	$(this).html($(this).parent().toggleClass("nav-list-parent-open").hasClass("nav-list-parent-open") ? "−" : "+");
 	
 	return false;
 });
@@ -56,7 +56,7 @@ var $navsearch = $("#nav-search").bind("input", function(){
 			out += html(obj.parent, obj.item);
 		});
 	} else {
-		out = '<section><p>No results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a>Is this a problem?</a></p></section';
+		out = '<section><p>No results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a class="bug">Bug?</a></p></section';
 	}
 	
 	$("#main").html(out);
@@ -65,23 +65,28 @@ var $navsearch = $("#nav-search").bind("input", function(){
 
 /*** loading ***/
 $(window).bind("hashchange", function(){
-	var hash = decodeURIComponent(window.location.hash), item = tree, crumbs = [];
+	var hash = decodeURIComponent(window.location.hash), val = hash.substring(2), search = $navsearch.val(), item = tree, crumbs = [];
 	
 	if (!hash.length) { return $("#main").html('<section>' + item.desc + '</section>'); }
 	
-	if (hash[1] === "?") { !$navsearch.val() && $navsearch.val(hash.substring(2)).trigger("input"); return; }
+	if (hash[1] === "?") {
+		val !== search && $navsearch.val(val).trigger("input");
+		return;
+	} else {
+		$navsearch.val("");
+	}
 	
 	$("a", $navlist).each(function(){
 		var $this = $(this), href = decodeURIComponent($this.attr("href"));
 		
 		if (hash.indexOf(href) === 0) {
-			$this.children().length && $this.addClass("nav-list-parent-open");
+			$this.children().length && $this.addClass("nav-list-parent-open").children().html("−");
 			
 			href === hash && $(".nav-list-selected", $navlist).removeClass("nav-list-selected") && $this.addClass("nav-list-selected");
 		}
 	});
 	
-	hash.substring(2).split("/").forEach(function(part){
+	val.split("/").forEach(function(part){
 		crumbs.unshift(item = item.kids[part]);
 	});
 	
@@ -136,10 +141,16 @@ function html(parent, item) {
 		'<p>' +
 			item.desc +
 			(nosupport.length ? ' <span class="s-unsupported">Not supported in ' + nosupport.join(", ") + '.</span>' : '') +
-			' <a href="' + item.more + '">more</a> ∙ <a>bug</a>' +
+			' <a href="' + item.more + '">more</a> ∙ <a class="bug">bug</a>' +
 		'</p>' +
 		(argdesc && '<dl>' + argdesc + '</dl>') +
 	"</section>";
 }
+
+
+/*** bugs ***/
+$(".bug").live("click", function(){
+	$(this).replaceWith("Is there a problem? Please <a>let us know</a> or <a>submit a fix</a>!");
+});
 
 })(jQuery, tree);

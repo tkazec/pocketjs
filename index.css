@@ -5,7 +5,6 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 /*** global ***/
 body {
 	font: 12px/15px "Dejavu Sans", sans-serif;
-	margin: 10px;
 }
 
 a {
@@ -17,7 +16,7 @@ a:hover, a:focus {
 	color: #0060FF;
 }
 
-var, code {
+code, var {
 	font-family: "DejaVu Sans Mono", monospace;
 }
 
@@ -35,7 +34,7 @@ section {
 	-moz-box-shadow: 0 0 5px black;
 	-webkit-box-shadow: 0 0 5px black;
 	box-shadow: 0 0 5px black;
-	margin-bottom: 10px;
+	margin: 10px 0 10px 10px;
 	padding: 5px;
 }
 
@@ -57,7 +56,7 @@ var {
 }
 
 #main {
-	margin-left: 220px;
+	margin-left: 210px;
 }
 
 
@@ -86,14 +85,8 @@ var {
 .nav-list-parent + ul {
 	display: none;
 }
-.nav-list-parent > a::after {
-	content: "+ ";
-}
 .nav-list-parent-open + ul {
 	display: block;
-}
-.nav-list-parent-open > a::after {
-	content: "− ";
 }
 
 .nav-list-selected {

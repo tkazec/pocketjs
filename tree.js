@@ -82,15 +82,23 @@ var tree = {
 					"returns": "Number"
 				},
 				".atan2()": {
-					"desc": "",
-					"args": [],
+					"desc": "...",
+					"args": [{
+						"name": "y",
+						"desc": "...",
+						"type": "Number"
+					}, {
+						"name": "x",
+						"desc": "...",
+						"type": "Number"
+					}],
 					"returns": "Number"
 				},
 				".ceil()": {
 					"desc": "Returns <var>x</var> rounded up to the nearest whole number.",
 					"args": [{
 						"name": "x",
-						"desc": "Number to round up.",
+						"desc": "Number to use.",
 						"type": "Number"
 					}],
 					"returns": "Number"
@@ -117,7 +125,7 @@ var tree = {
 					"desc": "Returns <var>x</var> rounded down to the nearest whole number.",
 					"args": [{
 						"name": "x",
-						"desc": "Number to round down.",
+						"desc": "Number to use.",
 						"type": "Number"
 					}],
 					"returns": "Number"
@@ -177,7 +185,7 @@ var tree = {
 					"desc": "Returns <var>x</var> rounded to the nearest whole number.",
 					"args": [{
 						"name": "x",
-						"desc": "Number to round.",
+						"desc": "Number to use.",
 						"type": "Number"
 					}],
 					"returns": "Number"
@@ -212,9 +220,9 @@ var tree = {
 			}
 		},
 		"Array()": {
-			"desc": "blah",
-			"returns": "Array",
+			"desc": "...",
 			"args": [],
+			"returns": "Array",
 			"kids": {
 				".isArray()": {
 					"desc": "Returns <code>true</code> if <var>value</var> is an array, <code>false</code> if it's not.",
@@ -240,12 +248,16 @@ var tree = {
 					}],
 					"returns": "Array"
 				},
-				//"#every()": {},
+				"#every()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Boolean"
+				},
 				"#filter()": {
 					"desc": "Returns a new array comprised of elements from the original array that pass a <var>test</var>.",
 					"args": [{
 						"name": "test",
-						"desc": "Function to filter the elements by. Return <code>true</code> to include the element, or <code>false</code> to skip it.",
+						"desc": "Function to filter the elements with. Return <code>true</code> to include the element, or <code>false</code> to skip it.",
 						"type": "Function",
 						"args": { "a": "*", "b": "*" }
 					}, {
@@ -258,11 +270,15 @@ var tree = {
 					"returns": "Array",
 					"unsupported": { "IE": 8 }
 				},
-				//"#forEach()": {},
+				"#forEach()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Undefined"
+				},
 				"#indexOf()": {
 					"desc": "Returns the first index at which <var>element</var> can be found in an array, or <code>-1</code> if it is not present.",
 					"args": [{
-						"name": "value",
+						"name": "element",
 						"desc": "Element to locate in the array, compared using strict equality.",
 						"type": "*"
 					}, {
@@ -276,20 +292,20 @@ var tree = {
 					"unsupported": { "IE": 8 }
 				},
 				"#join()": {
-					"desc": "Returns an array's elements joined into a string.",
+					"desc": "Returns an array's elements joined into a string separated by <var>separator</var>.",
 					"args": [{
 						"name": "separator",
 						"desc": "String to separate the elements with.",
 						"type": "String",
 						"optional": true,
-						"default": ","
+						"default": "\",\""
 					}],
 					"returns": "String"
 				},
 				"#lastIndexOf()": {
 					"desc": "Returns the last index (searching backwards) at which <var>element</var> can be found in an array, or <code>-1</code> if it is not present.",
 					"args": [{
-						"name": "value",
+						"name": "element",
 						"desc": "Element to locate in the array, compared using strict equality.",
 						"type": "*"
 					}, {
@@ -297,12 +313,16 @@ var tree = {
 						"desc": "Index at which to start searching backwards. If negative, indicates an offset from the end of the array.",
 						"type": "Number",
 						"optional": true,
-						"default": -1
+						"default": "<length>"
 					}],
 					"returns": "Number",
 					"unsupported": { "IE": 8 }
 				},
-				//"#map()": {},
+				"#map()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Array"
+				},
 				"#pop()": {
 					"desc": "Removes the last element from an array and returns it.",
 					"args": [],
@@ -318,8 +338,16 @@ var tree = {
 					}],
 					"returns": "Number"
 				},
-				//"#reduce()": {},
-				//"#reduceRight()": {},
+				"#reduce()": {
+					"desc": "...",
+					"args": [],
+					"returns": "*"
+				},
+				"#reduceRight()": {
+					"desc": "...",
+					"args": [],
+					"returns": "*"
+				},
 				"#reverse()": {
 					"desc": "Reverses an array and returns a reference to it.",
 					"args": [],
@@ -345,12 +373,16 @@ var tree = {
 					}],
 					"returns": "Array"
 				},
-				//"#some()": {},
+				"#some()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Boolean"
+				},
 				"#sort()": {
 					"desc": "Sorts an array and returns a reference to it.",
 					"args": [{
 						"name": "compare",
-						"desc": "Function to sort the elements by. Sorts <var>a</var> to a lower index than <var>b</var> if the return value is less than 0, higher if it's more than 0, and keeps them the same if it's exactly <code>0</code>.",
+						"desc": "Function to sort the elements by. Sorts <var>a</var> to a lower index than <var>b</var> if the return value is less than 0, higher if it's more than 0, and keeps them the same if it's exactly 0.",
 						"type": "Function",
 						"args": { "a": "*", "b": "*" },
 						"optional": true,
@@ -388,15 +420,173 @@ var tree = {
 					"returns": "Number"
 				}
 			}
-		}/*,
-		"Boolean()": {
-			"desc": "Bar"
 		},
-		"Date()": {},
-		"Function()": {},
-		"Number()": {},
-		"Object()": {},
-		"RegExp()": {},
-		"String()": {}*/
+		"String()": {
+			"desc": "...",
+			"args": [{
+				"name": "value",
+				"desc": "Value to create a string from.",
+				"type": "*",
+				"optional": true
+			}],
+			"returns": "String",
+			"kids": {
+				".fromCharCode()": {
+					"desc": "Returns a string created using a sequence of Unicode values.",
+					"args": [{
+						"name": "value",
+						"desc": "A Unicode value.",
+						"type": "Number",
+						"unlimited": true
+					}],
+					"returns": "String"
+				},
+				"#length": {
+					"desc": "Reflects the length of a string.",
+					"returns": "Number"
+				},
+				"#charAt()": {
+					"desc": "Returns the character at <var>index</var> in a string.",
+					"args": [{
+						"name": "index",
+						"desc": "Index of the character to get.",
+						"type": "Number"
+					}],
+					"returns": "String"
+				},
+				"#charCodeAt()": {
+					"desc": "Returns the Unicode value of a character at <var>index</var> in a string.",
+					"args": [{
+						"name": "index",
+						"desc": "Index of the character to get the Unicode value of.",
+						"type": "Number"
+					}],
+					"returns": "String"
+				},
+				"#concat()": {
+					"desc": "Returns a new string comprised of the original string plus <var>string</var>(s).",
+					"args": [{
+						"name": "string",
+						"desc": "String to append.",
+						"type": "String",
+						"unlimited": true
+					}],
+					"returns": "String"
+				},
+				"#indexOf()": {
+					"desc": "Returns the first index at which <var>text</var> can be found in a string, or <code>-1</code> if it is not present.",
+					"args": [{
+						"name": "text",
+						"desc": "Text to locate in the array.",
+						"type": "String"
+					}, {
+						"name": "from",
+						"desc": "Index at which to start searching.",
+						"type": "Number",
+						"optional": true,
+						"default": 0
+					}],
+					"returns": "Number"
+				},
+				"#lastIndexOf()": {
+					"desc": "Returns the last index at which <var>text</var> can be found in a string, or <code>-1</code> if it is not present.",
+					"args": [{
+						"name": "text",
+						"desc": "Text to locate in the array.",
+						"type": "String"
+					}, {
+						"name": "from",
+						"desc": "Index at which to start searching backwards.",
+						"type": "Number",
+						"optional": true,
+						"default": "<length>"
+					}],
+					"returns": "Number"
+				},
+				"#localeCompare()": {
+					"desc": "...",
+					"args": [{
+						"name": "",
+						"desc": "",
+						"type": "String"
+					}],
+					"returns": "Number"
+				},
+				"#match()": {
+					"desc": "...",
+					"args": [{
+						"name": "regexp",
+						"desc": "",
+						"type": "RegExp"
+					}],
+					"returns": "Array|Null"
+				},
+				"#replace()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#search()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Number"
+				},
+				"#slice()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#split()": {
+					"desc": "...",
+					"args": [],
+					"returns": "Array"
+				},
+				"#substr()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#substring()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#toLocaleLowerCase()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#toLocaleUpperCase()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#toLowerCase()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#toUpperCase()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#trim()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#trimLeft()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				},
+				"#trimRight()": {
+					"desc": "...",
+					"args": [],
+					"returns": "String"
+				}
+			}
+		}
 	}
 };

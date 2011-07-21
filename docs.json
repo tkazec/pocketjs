@@ -1,4 +1,4 @@
-var tree = {
+{
 	"desc": "<p>PocketJS is a friendly JavaScript reference. &lt;3</p>",
 	"kids": {
 		"Math": {
@@ -589,4 +589,4 @@ var tree = {
 			}
 		}
 	}
-};
+}

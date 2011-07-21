@@ -1,0 +1,6 @@
+CACHE MANIFEST
+index.html
+index.css
+jquery.js
+index.js
+# production only: add manifest="cache.manifest" to <html> and replace this with modified date

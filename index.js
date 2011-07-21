@@ -1,11 +1,19 @@
-(function($, tree){
+(function($){
+
+/*** tree ***/
+// insert reference directly for production
+var tree = JSON.parse($.ajax("docs.json", {
+	async: false,
+	dataType: "text"
+}).responseText);
+
 
 /*** listing ***/
 var $navlist = (function build(parent, path){
-	var $ul = $("<ul/>"), path = path ? path + "/" : "/";
+	var $ul = $("<ul/>"), path = path ? path + "/" : "";
 	
 	$.each(parent.kids, function(name, kid){
-		var hasKids = kid.kids, $li = $("<li/>"), kpath = path + name, ekpath = "#" + encodeURIComponent(kpath);
+		var hasKids = kid.kids, $li = $("<li/>"), kpath = path + name, ekpath = "#!" + encodeURIComponent(kpath);
 		
 		$("<a/>", {
 			Class: "nav-list-" + (hasKids ? "parent" : "item"),
@@ -19,7 +27,7 @@ var $navlist = (function build(parent, path){
 		
 		kid.name = name;
 		kid.path = ekpath;
-		kid.more = 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects' + kpath.replace(/[.#()]/g, "");
+		kid.more = 'https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/' + kpath.replace(/[.#()]/g, "");
 	});
 	
 	return $ul;
@@ -153,4 +161,4 @@ $(".bug").live("click", function(){
 	$(this).replaceWith("Is there a problem? Please <a>let us know</a> or <a>submit a fix</a>!");
 });
 
-})(jQuery, tree);
+})(jQuery);

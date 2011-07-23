@@ -421,6 +421,73 @@
 				}
 			}
 		},
+		"Function()": {
+			"desc": "Returns a function containing the parsed <var>body</var>.",
+			"args": [{
+				"name": "arg",
+				"desc": "Named argument for the function.",
+				"type": "String",
+				"optional": true,
+				"unlimited": true
+			}, {
+				"name": "body",
+				"desc": "Code run in the function.",
+				"type": "String"
+			}],
+			"returns": "Function",
+			"kids": {
+				"#length": {
+					"desc": "Number of arguments the function expects.",
+					"returns": "Number",
+					"readonly": true
+				},
+				"#apply()": {
+					"desc": "Calls a function with a <var>context</var> and optional <var>args</var> and returns the output.",
+					"args": [{
+						"name": "context",
+						"desc": "Object to set <var>this</var> in the function to.",
+						"type": "Object"
+					}, {
+						"name": "args",
+						"desc": "Array of arguments to pass to the function.",
+						"type": "Array",
+						"optional": true
+					}],
+					"returns": "*"
+				},
+				"#bind()": {
+					"desc": "Returns a function that when called, calls the original function with the provided <var>context</var>, and optionally prepends <var>arg</var>ument(s).",
+					"args": [{
+						"name": "context",
+						"desc": "Object to set <var>this</var> in the function to.",
+						"type": "Object"
+					}, {
+						"name": "arg",
+						"desc": "Argument to pass to the function.",
+						"type": "*",
+						"optional": true,
+						"unlimited": true
+					}],
+					"returns": "Function",
+					"unsupported": { "IE": 8, "Firefox": 3.6, "Safari": 5.1, "Opera": 11.5 }
+				},
+				"#call()": {
+					"desc": "Calls a function with a <var>context</var> and optional <var>arg</var>uments and returns the output.",
+					"args": [{
+						"name": "context",
+						"desc": "Object to set <var>this</var> in the function to.",
+						"type": "Object"
+					}, {
+						"name": "arg",
+						"desc": "Argument to pass to the function.",
+						"type": "*",
+						"optional": true,
+						"unlimited": true
+					}],
+					"returns": "*"
+				}
+			}
+		},
 		"String()": {
 			"desc": "...",
 			"args": [{
@@ -537,8 +604,20 @@
 					"returns": "String"
 				},
 				"#split()": {
-					"desc": "...",
-					"args": [],
+					"desc": "Splits a string into an array by a <var>separator</var>.",
+					"args": [{
+						"name": "separator",
+						"desc": "Separator to split the string with.",
+						"type": "String",
+						"optional": true,
+						"default": "\"\""
+					}, {
+						"name": "limit",
+						"desc": "Maximum amount of times to split the string.",
+						"type": "Number",
+						"optional": true,
+						"default": "Infinity"
+					}],
 					"returns": "Array"
 				},
 				"#substr()": {
@@ -552,39 +631,42 @@
 					"returns": "String"
 				},
 				"#toLocaleLowerCase()": {
-					"desc": "...",
+					"desc": "Returns a string converted to lowercase, using any locale-specific case mappings.",
 					"args": [],
 					"returns": "String"
 				},
 				"#toLocaleUpperCase()": {
-					"desc": "...",
+					"desc": "Returns a string converted to uppercase, using any locale-specific case mappings.",
 					"args": [],
 					"returns": "String"
 				},
 				"#toLowerCase()": {
-					"desc": "...",
+					"desc": "Returns a string converted to lowercase.",
 					"args": [],
 					"returns": "String"
 				},
 				"#toUpperCase()": {
-					"desc": "...",
+					"desc": "Returns a string converted to uppercase.",
 					"args": [],
 					"returns": "String"
 				},
 				"#trim()": {
-					"desc": "...",
+					"desc": "Returns a string stripped of any leading and trailing whitespace.",
 					"args": [],
-					"returns": "String"
+					"returns": "String",
+					"unsupported": { "IE": 8, "Firefox": 3, "Safari": 4, "Opera": 10.1 }
 				},
 				"#trimLeft()": {
-					"desc": "...",
+					"desc": "Returns a string stripped of any leading whitespace.",
 					"args": [],
-					"returns": "String"
+					"returns": "String",
+					"unsupported": {}
 				},
 				"#trimRight()": {
-					"desc": "...",
+					"desc": "Returns a string stripped of any trailing whitespace.",
 					"args": [],
-					"returns": "String"
+					"returns": "String",
+					"unsupported": {}
 				}
 			}
 		}

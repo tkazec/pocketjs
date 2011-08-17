@@ -67,6 +67,7 @@ var $navsearch = $("#nav-search").bind("input", function(){
 		out = '<section><p>No results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a class="bug">Bug?</a></p></section';
 	}
 	
+	$("body").scrollTop(0);
 	$("#main").html(out);
 });
 
@@ -106,6 +107,7 @@ $(window).bind("hashchange", function(){
 		});
 		out += '</div>';
 	}
+	$("body").scrollTop(0);
 	$("#main").html(out);
 }).trigger("hashchange");
 
@@ -158,7 +160,7 @@ function html(parent, item) {
 
 /*** bugs ***/
 $(".bug").live("click", function(){
-	$(this).replaceWith("Is there a problem? Please <a>let us know</a> or <a>submit a fix</a>!");
+	$(this).replaceWith("Please <a>let us know</a> or <a>submit a fix</a>!");
 });
 
 })(jQuery);

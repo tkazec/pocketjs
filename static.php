@@ -64,8 +64,7 @@ if ($hash) {
 		array_unshift($crumbs, $item = $item['kids'][$part]);
 	}
 	
-	$title = "<a href='{$item['path']}'>{$item['name']}</a>";
-	$desc = "{$item['desc']} <a href='{$item['more']}'>more</a>";
+	$title = (isset($crumbs[1]) ? str_replace('()', '', $crumbs[1]['name']) : '') . $item['name'];
 }
 ?>
 <!DOCTYPE html>

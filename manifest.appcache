@@ -1,0 +1,6 @@
+CACHE MANIFEST
+index.html
+index.css
+http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js
+index.js
+# production only: add manifest="manifest.appcache" to <html> and replace this with modified date

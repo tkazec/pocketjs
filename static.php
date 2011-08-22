@@ -76,7 +76,7 @@ if ($hash) {
 	<body>
 		<?php
 		if ($hash) {
-			echo html(isset($crumbs[1]) ? $crumbs[1] : null, $item);
+			echo html($crumbs[1] ?: null, $item);
 		} else {
 			echo "<h1>PocketJS</h1><p>{$tree['desc']}</p>";
 		}

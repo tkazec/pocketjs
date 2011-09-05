@@ -46,6 +46,7 @@ var $navsearch = $("#nav-search").bind("input", function(){
 	
 	if (!text) { return window.location.hash = $(".nav-list-selected", $navlist).attr("href") || ""; }
 	
+	decodeURIComponent(window.location.hash)[1] !== "?" && _gaq.push(["_trackPageview", "/?"]);
 	window.location.hash = encodeURIComponent("?" + text);
 	
 	(function match(parent, item){
@@ -76,13 +77,17 @@ var $navsearch = $("#nav-search").bind("input", function(){
 $(window).bind("hashchange", function(){
 	var hash = decodeURIComponent(window.location.hash), val = hash.substring(2), search = $navsearch.val(), item = tree, crumbs = [];
 	
-	if (!hash.length) { return $("#main").html('<section>' + item.desc + '</section>'); }
-	
-	if (hash[1] === "?") {
+	if (!hash.length) {
+		$("#main").html('<section>' + item.desc + '</section>');
+		_gaq.push(["_trackPageview", "/"]);
+		return;
+	} else if (hash[1] === "?") {
 		val !== search && $navsearch.val(val).trigger("input");
+		!search && _gaq.push(["_trackPageview", "/?"]);
 		return;
 	} else {
 		$navsearch.val("");
+		_gaq.push(["_trackPageview", "/" + val]);
 	}
 	
 	$("a", $navlist).each(function(){

@@ -14,7 +14,7 @@ rm build.sh
 rm -rf .git
 
 #sed -i '' -e 's/<html/& manifest="manifest.appcache"/' index.html # disabled for now due to complications
-sed -i '' -e "s/##GA##/$GA/" index.js
+sed -i '' -e "s/##GA##/$GA/" index.html
 echo "#$TIME" >> manifest.appcache
 
 yuicompressor -o index.css index.css

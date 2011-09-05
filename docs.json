@@ -220,8 +220,12 @@
 			}
 		},
 		"Array()": {
-			"desc": "...",
-			"args": [],
+			"desc": "Returns an empty array with a length of <var>n</var>.",
+			"args": [{
+				"name": "n",
+				"desc": "Length of the array.",
+				"type": "Number"
+			}],
 			"returns": "Array",
 			"kids": {
 				".isArray()": {
@@ -435,6 +439,7 @@
 				"type": "String"
 			}],
 			"returns": "Function",
+			"literal": ["function(", "){", "}"],
 			"kids": {
 				"#length": {
 					"desc": "Number of arguments the function expects.",
@@ -489,14 +494,15 @@
 			}
 		},
 		"String()": {
-			"desc": "...",
+			"desc": "Returns a string filled with <var>value</var>.",
 			"args": [{
 				"name": "value",
-				"desc": "Value to create a string from.",
+				"desc": "Value put in the string.",
 				"type": "*",
 				"optional": true
 			}],
 			"returns": "String",
+			"literal": ["\"", "\""],
 			"kids": {
 				".fromCharCode()": {
 					"desc": "Returns a string created using a sequence of Unicode values.",

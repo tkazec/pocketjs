@@ -142,11 +142,15 @@ function html(parent, item) {
 	
 	syntax += (isFn || item.readonly ? ' →' : ' ↔') + ' <span class="s-rtype">' + $("<div/>").text(item.returns).html() + '</span>';
 	
+	item.literal && (syntax += item.args.reduce(function(str, arg, i){
+		return str + '<var>' + arg.name + '</var>' + item.literal[i + 1];
+	}, "\n" + item.literal[0]));
+	
 	$.each(item.unsupported || {}, function(browser, version){
 		nosupport.push(browser +  " ≤ " + version);
 	});
 	
-	return item.html = "<section>" +
+	return item.html = '<section>' +
 		'<pre><code>' + syntax + '</code></pre>' +
 		'<p>' +
 			item.desc +
@@ -154,7 +158,7 @@ function html(parent, item) {
 			' <a href="' + item.more + '">more</a> ∙ <a class="bug">bug</a>' +
 		'</p>' +
 		(argdesc && '<dl>' + argdesc + '</dl>') +
-	"</section>";
+	'</section>';
 }
 
 

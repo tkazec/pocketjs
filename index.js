@@ -42,11 +42,11 @@ $("a", $navlist).children().click(function(){
 
 /*** searching ***/
 var $navsearch = $("#nav-search").bind("input", function(){
-	var text = $(this).val().trim().toLowerCase(), matches = [], out = "";
+	var text = $(this).val().trim().toLowerCase(), matches = [];
 	
 	if (!text) { return window.location.hash = $(".nav-list-selected", $navlist).attr("href") || ""; }
 	
-	decodeURIComponent(window.location.hash)[1] !== "?" && _gaq.push(["_trackPageview", "/?"]);
+	decodeURIComponent(window.location.hash)[1] !== "?" && _gaq.push(["_trackPageview", "/search"]);
 	window.location.hash = encodeURIComponent("?" + text);
 	
 	(function match(parent, item){
@@ -57,16 +57,14 @@ var $navsearch = $("#nav-search").bind("input", function(){
 		item.kids && $.each(item.kids, function(k, v){ match(item.name ? item : v, v); });
 	})(tree, tree);
 	
-	if (matches.length) {
-		matches.sort(function(a, b){
-			var anl = a.item.name.length, bnl = b.item.name.length;
-			return a.index === b.index ? (anl === bnl ? 0 : anl - bnl) : a.index - b.index;
-		}).forEach(function(obj){
-			out += html(obj.parent, obj.item);
-		});
-	} else {
-		out = '<section><p>No results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a class="bug">Bug?</a></p></section';
-	}
+	var out = '<section><p>' + matches.length + ' results found for <span class="s-val">' + $('<div/>').text(text).html() + '</span>! <a class="bug">Bug?</a></p></section>';
+	
+	matches.length && matches.sort(function(a, b){
+		var anl = a.item.name.length, bnl = b.item.name.length;
+		return a.index === b.index ? (anl === bnl ? 0 : anl - bnl) : a.index - b.index;
+	}).forEach(function(obj){
+		out += html(obj.parent, obj.item);
+	});
 	
 	$("body").scrollTop(0);
 	$("#main").html(out);
@@ -83,7 +81,7 @@ $(window).bind("hashchange", function(){
 		return;
 	} else if (hash[1] === "?") {
 		val !== search && $navsearch.val(val).trigger("input");
-		!search && _gaq.push(["_trackPageview", "/?"]);
+		!search && _gaq.push(["_trackPageview", "/search"]);
 		return;
 	} else {
 		$navsearch.val("");

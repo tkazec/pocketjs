@@ -1,5 +1,5 @@
 {
-	"desc": "<p>PocketJS is a friendly JavaScript reference. &lt;3</p>",
+	"desc": "<p>PocketJS is a friendly JavaScript reference. &lt;3</p><br><p>At the moment it's a bit empty, but go ahead and choose or search for something via the sidebar or OpenSearch :)</p>",
 	"kids": {
 		"Math": {
 			"desc": "Various mathematical constants and functions.",
